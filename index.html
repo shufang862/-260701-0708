@@ -246,52 +246,66 @@
 
         .card.routine .time-badge { color: #A39C8C; }
 
-        /* 預訂資訊面板 */
-        .info-panel {
-            position: fixed;
-            bottom: 65px; left: 0; right: 0;
-            background-color: #FFFFFF;
-            border-top: 2px dashed var(--light-gray);
-            border-radius: 16px 16px 0 0;
-            box-shadow: 0 -6px 16px rgba(0,0,0,0.06);
-            z-index: 199;
-            padding: 16px 18px;
-            max-height: 60vh;
-            overflow-y: auto;
-        }
-        .info-panel h3 { font-size: 14px; margin-bottom: 10px; color: var(--dark-gray); }
-        .info-panel-item { font-size: 12px; padding: 8px 0; border-bottom: 1px dashed var(--light-gray); }
-        .info-panel-item:last-child { border-bottom: none; }
-        .info-panel-item .info-title { margin-bottom: 2px; }
+        /* 分頁內容容器 */
+        .tab-content { padding: 15px; }
+        .section-label { font-size: 12px; font-weight: bold; color: #8A8273; margin: 18px 0 8px; }
+        .section-label:first-child { margin-top: 0; }
 
-        /* 底部固定工具欄 */
-        .footer-bar {
+        /* 美食／購物卡片（共用樣式） */
+        .food-card {
+            background-color: var(--card-bg);
+            border-radius: 14px;
+            padding: 12px;
+            border: 1px solid rgba(234, 229, 220, 0.6);
+            margin-bottom: 10px;
+        }
+        .food-name-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
+        .food-name { font-weight: bold; font-size: 14px; }
+        .food-tag {
+            font-size: 10px;
+            background: var(--light-gray);
+            color: #6B6657;
+            padding: 2px 8px;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+        .food-desc { font-size: 12px; color: #7A7A7A; line-height: 1.5; }
+
+        /* 資訊分頁卡片 */
+        .info-card {
+            background-color: var(--card-bg);
+            border-radius: 14px;
+            padding: 12px;
+            border: 1px solid rgba(234, 229, 220, 0.6);
+            margin-bottom: 8px;
+        }
+        .info-card .info-title { font-weight: bold; font-size: 13px; margin-bottom: 3px; }
+        .info-card .info-sub { font-size: 12px; color: #7A7A7A; }
+        .info-card.alert-tone { background-color: var(--accent-pink); border-color: #F2C4C1; }
+        .info-card.alert-tone .info-title, .info-card.alert-tone .info-sub { color: var(--text-pink); }
+
+        /* 底部分頁切換列 */
+        .tab-bar {
             position: fixed;
             bottom: 0; left: 0; right: 0;
-            height: 65px;
+            display: flex;
             background-color: #FFFFFF;
             border-top: 1px solid var(--light-gray);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 0 10px;
             z-index: 200;
             box-shadow: 0 -4px 10px rgba(0,0,0,0.02);
         }
-
-        .footer-btn {
-            background-color: var(--bg-color);
-            border: 1px solid var(--light-gray);
-            padding: 8px 16px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: bold;
-            color: var(--dark-gray);
-            text-align: center;
-            cursor: pointer;
+        .tab-btn {
             flex: 1;
-            margin: 0 5px;
+            text-align: center;
+            padding: 9px 0 8px;
+            font-size: 11px;
+            font-weight: bold;
+            color: #8A8273;
+            cursor: pointer;
+            border-top: 2px solid transparent;
         }
+        .tab-btn .tab-icon { display: block; font-size: 17px; margin-bottom: 2px; }
+        .tab-btn.active { color: var(--dark-gray); border-top-color: var(--dark-gray); }
     </style>
 </head>
 <body>
@@ -329,6 +343,7 @@
         </div>
     </div>
 
+    <div id="panel-itinerary" class="tab-panel">
     <div class="nav-bar" id="navBar">
         <a href="#day1" class="nav-item" data-day="day1">7/1 (三)</a>
         <a href="#day2" class="nav-item" data-day="day2">7/2 (四)</a>
@@ -918,44 +933,174 @@
             </div>
         </div>
     </div>
-
-    <!-- 預訂資訊面板 -->
-    <div class="info-panel" id="infoPanel" style="display:none;">
-        <h3>📋 訂房與航班資訊</h3>
-        <div class="info-panel-item">
-            <div class="info-title">航班</div>
-            7/2 00:20 台北➔吉隆坡｜AirAsia X D7 379<br>
-            7/2 13:30 吉隆坡➔清邁｜AirAsia AK 856<br>
-            7/8 01:50 清邁➔台北｜Thai AirAsia FD 242
-        </div>
-        <div class="info-panel-item">
-            <div class="info-title">1. Khum Phaya Resort & Spa（7/2 - 7/4）</div>
-            <a class="map-link" target="_blank" rel="noopener" href="https://maps.google.com/?cid=556760724576334085">📍 開啟地圖</a>
-        </div>
-        <div class="info-panel-item">
-            <div class="info-title">2. Tawan Riverside - Elephant Resort（7/4 - 7/5）</div>
-            <a class="map-link" target="_blank" rel="noopener" href="https://maps.google.com/?cid=96242812611236659">📍 開啟地圖</a>
-        </div>
-        <div class="info-panel-item">
-            <div class="info-title">3. POR Thapae Gate（7/5 - 7/7）</div>
-            <a class="map-link" target="_blank" rel="noopener" href="https://maps.google.com/?cid=4915717460196586752">📍 開啟地圖</a>
-        </div>
     </div>
 
-    <!-- 底部固定工具欄 -->
-    <div class="footer-bar">
-        <div class="footer-btn" id="infoBtn">📋 航班與飯店</div>
-        <div class="footer-btn" id="topBtn">⬆️ 回頂部</div>
+    <!-- 美食清單分頁 -->
+    <div id="panel-food" class="tab-panel" style="display:none;">
+    <div class="tab-content">
+
+        <div class="section-label">7/2 瓦洛洛市場與尚泰購物中心周邊</div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Central Chiangmai Food Park</span><span class="food-tag">美食街</span></div><div class="food-desc">百貨地下室美食街，冷氣開放環境乾淨，集合清邁各大名店分攤，如豬腳飯、泰式炒河粉，點餐完全不辣，適合抵達首晚的平穩用餐選擇。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Khao Soi Mae Mani（尚泰百貨分店）</span><span class="food-tag">泰北黃咖哩麵</span></div><div class="food-desc">米其林必比登推薦名店，湯頭濃郁，炸得酥脆的雞蛋麵對小一男生來說像零食一樣有吸引力。不耐辣可點不辣的雞肉清湯粿條。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Dumrong Pork Shop</span><span class="food-tag">瓦洛洛市場小吃</span></div><div class="food-desc">瓦洛洛市場內最著名的排隊名店，主打現炸泰北香腸與香脆炸豬皮，香脆不油膩，小男生接受度極高。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Thanoon Souvenir &amp; Sweet</span><span class="food-tag">傳統甜點</span></div><div class="food-desc">販售現做芒果糯米飯與泰式椰奶小點心，大人小孩都能迅速補充體力的甜品。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">The Baristro at Ping River</span><span class="food-tag">景觀咖啡廳</span></div><div class="food-desc">位於平河畔的知名文青咖啡店，空間寬敞，室外有草地與河景，也提供無咖啡因水果氣泡飲與鬆餅給孩子享用。</div></div>
+
+        <div class="section-label">7/3 恐龍樂園、悟孟寺與 Kadmanee 夜市周邊</div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Hidden Village Restaurant</span><span class="food-tag">庭園餐廳</span></div><div class="food-desc">位於恐龍樂園內部，玩累了可直接就近用餐，提供美式炸雞、薯條、漢堡與不辣的泰式炒飯，完全貼合小學男生的飲食喜好。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Khao Soi Nimman</span><span class="food-tag">泰北料理</span></div><div class="food-desc">清邁最具代表性的咖哩麵店之一，提供海鮮、牛肉等多種配料，店內環境乾淨整潔，也有烘蛋等完全不辣的家常菜。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">No.39 Cafe</span><span class="food-tag">景觀咖啡廳</span></div><div class="food-desc">隱身在悟孟寺附近的藝術村落，中庭有蒂芬妮藍的人造滑梯與湖泊，孩子可在草地上看鴨子，大人能坐在湖畔喝杯去冰無糖拿鐵放鬆。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Kadmanee Market 炸雞與碳烤攤</span><span class="food-tag">夜市小吃</span></div><div class="food-desc">推薦夜市內現炸泰式炸雞翅與沙嗲肉串，帶有微甜的南洋風味，是小男生極愛的夜市手指食物。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">紙包魚與涼拌菜攤（กาดมณี）</span><span class="food-tag">在地夜市美食</span></div><div class="food-desc">泰國本地家庭最常點的晚餐組合，現烤鹽抹鮮魚撕開後魚肉鮮嫩無刺，適合分給孩子吃，大人可搭配青木瓜沙拉。</div></div>
+
+        <div class="section-label">7/4 椰林市集與美旺大象營山區</div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">椰林市集現烤椰子糕攤</span><span class="food-tag">市集小吃</span></div><div class="food-desc">現點現烤的傳統泰式椰子糕，外皮酥脆、內部呈半熟漿狀，椰香濃郁帶微甜，很適合當孩子的點心。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">椰林市集手調水果冰沙</span><span class="food-tag">市集飲品</span></div><div class="food-desc">用新鮮整顆芒果、西瓜或椰子現打的純水果冰沙，可要求完全不加糖，給孩子最純粹的水果原汁。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Elephant Friends River Restaurant</span><span class="food-tag">河畔景觀餐廳</span></div><div class="food-desc">位於大象營內，坐在木製平台用餐，眼前溪流就是大象洗澡的地方，主打溫和的泰式歐姆蛋飯、打拋豬（可不辣）與美式炸物。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Lanna style Coffee @ Mae Wang</span><span class="food-tag">山區景觀咖啡</span></div><div class="food-desc">靠近竹筏漂流起點的在地木質竹編咖啡棚，大人可喝杯冰美式，孩子能在大自然中看溪流與大象。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">美旺在地烤肉串與烤玉米攤</span><span class="food-tag">鄉村路邊小吃</span></div><div class="food-desc">山路旁常見的炭火攤位，現烤黃玉米塗微量鹽水，以及微甜醬汁的碳烤豬肉串，一串只要5到10泰銖。</div></div>
+
+        <div class="section-label">7/5 真心市集與古城週日夜市</div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Jing Jai Market Organic Food Court</span><span class="food-tag">市集美食街</span></div><div class="food-desc">市集內極乾淨的熟食區，推薦現炊手工豬肉燒賣與自製酵母有機麵包，口味清淡健康，適合學齡兒童。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Graph Cafe（Jing Jai Market 分店）</span><span class="food-tag">精品咖啡廳</span></div><div class="food-desc">清邁極具代表性的設計感咖啡品牌，調味咖啡評價極高，適合品嚐視覺與風味兼具的特調冷萃咖啡。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">週日夜市手作香蕉煎餅</span><span class="food-tag">夜市小吃</span></div><div class="food-desc">親子必點的夜市甜點，現煎酥脆餅皮包裹新鮮香蕉片，可淋煉乳或巧克力醬，視覺味覺都吸引小男生。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">週日夜市碳烤花枝丸與魚丸串</span><span class="food-tag">夜市小吃</span></div><div class="food-desc">Q彈魚丸串烤熱後，大人可沾酸辣醬，孩子可直接吃原味，方便邊走邊吃且不佔胃容量。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">週日夜市鮮切熱帶水果攤</span><span class="food-tag">夜市小吃</span></div><div class="food-desc">沿途都有的現切水果盒，放冰塊保鮮，7月的西瓜、波羅蜜與小鳳梨非常甜，能隨時為孩子補充水分。</div></div>
+
+        <div class="section-label">7/6 傳統市場與夜間動物園周邊</div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Chom Cafe and Restaurant</span><span class="food-tag">主題餐廳</span></div><div class="food-desc">Threads上熱門的乾冰迷霧瀑布餐廳，餐點融合泰式與義式，推薦小男生點松露薯條或拿坡里義大利麵。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">SP Chicken</span><span class="food-tag">烤雞名店</span></div><div class="food-desc">古城西側的傳奇烤雞店，旋轉烘烤香草全雞外皮香脆，肉質一撕即化，完全不辣且富含蛋白質，親子無雷首選。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Huen Phen</span><span class="food-tag">傳統泰北料理</span></div><div class="food-desc">老字號名店，正宗泰北傳統拼盤（炸豬皮、青辣椒醬、杭萊咖哩），建議傍晚開門時前往，幫孩子點不辣清湯粿條。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Akha Ama Phrasingh</span><span class="food-tag">在地咖啡廳</span></div><div class="food-desc">阿卡族自產自銷的精品咖啡店，位於古城內，冰拿鐵與濃縮咖啡評價極高，適合下午外帶回飯店享用。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Roast 8ry Lab</span><span class="food-tag">拉花冠軍咖啡</span></div><div class="food-desc">世界咖啡拉花冠軍主理，拿鐵上的獨角獸或噴火龍拉花，連小男生也會驚嘆連連。</div></div>
+
+        <div class="section-label">7/7 古城步行與運河市集周邊</div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Ginger Farm Kitchen</span><span class="food-tag">米其林餐廳</span></div><div class="food-desc">產地直送的有機綠色餐廳，推薦泰北烤豬肉、蟹肉烘蛋與新鮮田園蔬果昔，大人用餐同時可看孩子在沙坑玩耍。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">懷登塔水庫湖畔竹筏小木屋</span><span class="food-tag">水岸料理</span></div><div class="food-desc">坐在水面上的茅草小屋，腳可泡進湖水中，點現烤鮮魚、炸雞翅與竹筒糯米飯，像野外露營探險。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Early Owls（初鴞咖啡）</span><span class="food-tag">森林景觀咖啡</span></div><div class="food-desc">市區邊緣的大片古老樹木與池塘，提供免費野餐墊與折疊椅，孩子可觀察松鼠與昆蟲，大人悠閒享受午後。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Khao Kha Moo Chang Phueak</span><span class="food-tag">豬腳飯名店</span></div><div class="food-desc">古城北門夜市最著名的地標，豬腳滷得軟爛入味，微甜滷汁淋飯，連挑食的孩子也能迅速吃完大半盤。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">古城手標泰式茶（ChaTraMue 塔佩門店）</span><span class="food-tag">連鎖飲品</span></div><div class="food-desc">返台前的最後補給站，經典泰式奶茶或綠奶茶（可要求去冰、微糖），也有泰奶口味霜淇淋當作獎勵小點。</div></div>
+
+    </div>
+    </div>
+
+    <!-- 資訊分頁 -->
+    <div id="panel-info" class="tab-panel" style="display:none;">
+    <div class="tab-content">
+
+        <div class="section-label">航班</div>
+        <div class="info-card">
+            <div class="info-sub">7/2 00:20 台北➔吉隆坡｜AirAsia X D7 379</div>
+            <div class="info-sub">7/2 13:30 吉隆坡➔清邁｜AirAsia AK 856</div>
+            <div class="info-sub">7/8 01:50 清邁➔台北｜Thai AirAsia FD 242</div>
+        </div>
+
+        <div class="section-label">住宿（4）</div>
+        <div class="info-card">
+            <div class="info-title">1. 吉隆坡遨途機場酒店</div>
+            <div class="info-sub">7/2 過境轉機（05:00 - 12:00）</div>
+        </div>
+        <div class="info-card">
+            <div class="info-title">2. Khum Phaya Resort &amp; Spa（7/2 - 7/4）</div>
+            <a class="map-link" target="_blank" rel="noopener" href="https://maps.google.com/?cid=556760724576334085">📍 開啟地圖</a>
+        </div>
+        <div class="info-card">
+            <div class="info-title">3. Tawan Riverside - Elephant Resort（7/4 - 7/5）</div>
+            <a class="map-link" target="_blank" rel="noopener" href="https://maps.google.com/?cid=96242812611236659">📍 開啟地圖</a>
+        </div>
+        <div class="info-card">
+            <div class="info-title">4. POR Thapae Gate（7/5 - 7/7）</div>
+            <a class="map-link" target="_blank" rel="noopener" href="https://maps.google.com/?cid=4915717460196586752">📍 開啟地圖</a>
+        </div>
+
+        <div class="section-label">緊急聯絡</div>
+        <div class="info-card alert-tone">
+            <div class="info-title">新安東京海上產險</div>
+            <div class="info-sub">24小時客服／道路救援：0800-050-119（國內免付費）</div>
+            <div class="info-sub">海外緊急救援：+886-2-2326-6777（手機直撥，須自付國際電話費）</div>
+        </div>
+
+    </div>
+    </div>
+
+    <!-- 購物清單分頁 -->
+    <div id="panel-shop" class="tab-panel" style="display:none;">
+    <div class="tab-content">
+
+        <div class="section-label">零食藥妝伴手禮</div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">手標泰式奶茶 ChaTraMue 茶葉包</span></div><div class="food-desc">金、紅、綠三種口味，無糖無奶，自己調整濃淡與甜度，清邁機場、超市都買得到。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">芒果／香蕉口味 Pocky</span></div><div class="food-desc">泰國限定版本，平均一盒只要20泰銖左右。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Bento 碳烤魷魚片</span></div><div class="food-desc">蒜辣、香辣、麻辣口味最多人買，香味十足的下酒零食。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Taro 鱈魚絲</span></div><div class="food-desc">自然海鮮味搭配獨特泰式香料，香味十足又不會死鹹。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">皇家農場百花蜂蜜</span></div><div class="food-desc">泰王拉瑪九世發起的皇家計畫明星商品，來自未受污染的山林花源。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Fruit King 冷凍乾燥水果乾</span></div><div class="food-desc">真空冷凍乾燥技術保留水果香甜及外觀，台灣比較少見的山竹必買。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">泰式即食調理包</span></div><div class="food-desc">冬蔭功、椰漿雞、綠咖哩、打拋豬，賣得很便宜，方便攜帶。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">青草膏／蜈蚣膏</span></div><div class="food-desc">便宜好用的泰國草本護膚與止癢系產品代表。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">老虎牌萬金油 Tiger Balm</span></div><div class="food-desc">泰版配方跟台灣常見的不太一樣，止癢提神經典款。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">老大哥花生</span></div><div class="food-desc">國民下酒零食，瓦洛洛市場也常見。</div></div>
+
+        <div class="section-label">藥妝小物</div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">ele 晚安面膜</span></div><div class="food-desc">擠壓罐裝式，每天晚上敷一下保水感不錯。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Soffell 防蚊液</span></div><div class="food-desc">噴在皮膚上涼涼的，帶有微微香氣，驅蚊好物。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Snail White 蝸牛霜系列</span></div><div class="food-desc">泰國美妝代表品牌之一，隨處可見。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Journal 芒果糯米飯香水</span></div><div class="food-desc">清邁當地品牌，超人氣的芒果糯米香水，僅清邁在地門市購得。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Herb Basics 草本身體乳／香氛皂</span></div><div class="food-desc">清邁本地天然品牌，無化學添加，採用本地植物萃取成份。</div></div>
+
+        <div class="section-label">清邁傳統手工藝</div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">博桑手繪紙傘 Bo Sang Umbrella</span></div><div class="food-desc">博桑村民從事製傘已有兩百餘年歷史，絲、棉、Sa紙、竹子都是當地生產。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">蘭納漆器</span></div><div class="food-desc">黑色與金色圖案極具魅力，木料竹子金屬製成的容器與裝飾品。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">蘭納銀器</span></div><div class="food-desc">使用92.5%純銀（泰銀），圖案靈感來自蓮花、神話生物，週六夜市「打銀街」Wua Lai Road最集中。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">青瓷 Celadon</span></div><div class="food-desc">淡綠釉陶器，桑甘烹地區窯燒，高溫快速降溫產生獨特裂痕。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">柚木手工木雕</span></div><div class="food-desc">柚木、紅木、芒果木製成，木雕大象、動物擺飾很受歡迎。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Sa紙手作小卡／燈罩</span></div><div class="food-desc">桑樹皮純手工紙製品，博桑村特產。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">藍染布料</span></div><div class="food-desc">泰北傳統植物染織物，常見於Baan Kang Wat藝術村。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">山地部族刺繡飾品</span></div><div class="food-desc">苗族、阿卡族傳統圖騰手工繡片與耳環。</div></div>
+
+        <div class="section-label">包包</div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">NaRaYa 蝴蝶結曼谷包</span></div><div class="food-desc">細緻手工藝與獨特蝴蝶結設計聞名全球，清邁必買包包首選。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">天然編織草編包</span></div><div class="food-desc">市集裡常見的編織包、草編包，百搭耐用。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">輪胎再生環保包</span></div><div class="food-desc">清邁本土品牌，以回收汽車輪胎與再生皮革製作，堅固耐用造型前衛。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">山地部族織紋肩背包</span></div><div class="food-desc">北泰部落圖騰織法，週日夜市常見。</div></div>
+
+        <div class="section-label">棉麻服飾</div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">palitpalit 設計棉麻服飾</span></div><div class="food-desc">清邁小眾品牌，主打設計款棉麻服飾，質感剪裁舒適。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Muak 棉麻帽款</span></div><div class="food-desc">清邁人氣帽子店，款式多樣，價格不貴，材質舒適。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">Jim Thompson 泰絲圍巾</span></div><div class="food-desc">世界知名泰絲品牌，圍巾手帕高貴典雅，適合作為高級伴手禮。</div></div>
+
+        <div class="section-label">Threads 網友推薦</div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">泰天鵝鼻通</span><span class="food-tag">Threads熱推</span></div><div class="food-desc">隨身救星，暈車、鼻塞、一聞就通。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">屈臣氏牙線</span><span class="food-tag">Threads熱推</span></div><div class="food-desc">超細耐用，不怕斷線卡牙縫。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">MAMA OK 鹹蛋黃乾拌麵</span><span class="food-tag">Threads熱推</span></div><div class="food-desc">鹹蛋黃加辣的組合，配半熟水波蛋一起吃很搭。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">COPENN 香氛洗沐浴</span><span class="food-tag">Threads熱推</span></div><div class="food-desc">草本加木質調，鼠尾草、茴香、天竺葵、乳香。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">蜂膠口腔噴劑</span><span class="food-tag">Threads熱推</span></div><div class="food-desc">喉嚨痛初期救星，隨身攜帶很方便。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">深海魚油</span><span class="food-tag">Threads熱推</span></div><div class="food-desc">高純度Omega-3，CP值很高。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">膠原蛋白粉包</span><span class="food-tag">Threads熱推</span></div><div class="food-desc">隨手沖泡，沒有奇怪的味道。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">酸痛膏</span><span class="food-tag">Threads熱推</span></div><div class="food-desc">緩解痠背痛，也有人拿來擦痘痘消腫。</div></div>
+        <div class="food-card"><div class="food-name-row"><span class="food-name">KENTNEEY 包</span><span class="food-tag">Threads熱推</span></div><div class="food-desc">近一兩年熱門的小眾包款，背帶設計成袖口綁起來的樣子，曾在Threads上引起網友討論。</div></div>
+
+    </div>
+    </div>
+
+    <!-- 底部分頁切換列 -->
+    <div class="tab-bar">
+        <div class="tab-btn active" data-tab="itinerary"><span class="tab-icon">🗺️</span>行程</div>
+        <div class="tab-btn" data-tab="food"><span class="tab-icon">🍜</span>美食</div>
+        <div class="tab-btn" data-tab="info"><span class="tab-icon">📋</span>資訊</div>
+        <div class="tab-btn" data-tab="shop"><span class="tab-icon">🛍️</span>購物</div>
     </div>
 
     <script>
-        var infoPanel = document.getElementById('infoPanel');
-        document.getElementById('infoBtn').addEventListener('click', function () {
-            infoPanel.style.display = (infoPanel.style.display === 'none') ? 'block' : 'none';
-        });
-
-        document.getElementById('topBtn').addEventListener('click', function () {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        var tabPanels = { itinerary: 'panel-itinerary', food: 'panel-food', info: 'panel-info', shop: 'panel-shop' };
+        var tabBtns = Array.prototype.slice.call(document.querySelectorAll('.tab-btn'));
+        tabBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var target = btn.getAttribute('data-tab');
+                tabBtns.forEach(function (b) { b.classList.toggle('active', b === btn); });
+                Object.keys(tabPanels).forEach(function (key) {
+                    document.getElementById(tabPanels[key]).style.display = (key === target) ? 'block' : 'none';
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
         });
 
         var navItems = Array.prototype.slice.call(document.querySelectorAll('.nav-item'));
